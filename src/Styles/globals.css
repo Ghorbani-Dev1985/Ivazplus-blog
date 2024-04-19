@@ -15,7 +15,7 @@
         @apply list-none
       }
       body {
-        @apply text-secondary bg-white h-full font-ShabnamFD text-lg overflow-x-hidden scroll-smooth;
+        @apply text-zinc-800 bg-white h-full font-ShabnamFD text-lg overflow-x-hidden scroll-smooth;
       }
 }
 
