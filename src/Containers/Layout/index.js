@@ -1,13 +1,13 @@
-import Footer from "@/UI/Footer";
-import Header from "@/UI/Header";
-import PreFooter from "@/UI/PreFooter";
+import Header from "./Header";
+import Footer from "./Footer";
 
 const Layout = ({children}) => {
     return ( 
         <>
         <Header />
+        <main className="container my-10">
         {children}
-        <PreFooter />
+        </main>
         <Footer />
         </>
      );

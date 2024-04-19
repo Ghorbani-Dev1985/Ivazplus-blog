@@ -1,7 +1,10 @@
+import Layout from '@/Containers/Layout';
 import BlogsFeature from '@/Features/Blogs/Blogs'
 const Blogs = () => {
     return ( 
-        <BlogsFeature />
+        <Layout>
+            <BlogsFeature />
+        </Layout>
      );
 }
  

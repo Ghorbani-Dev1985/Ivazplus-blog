@@ -9,13 +9,15 @@
       }
       html{
         @apply scroll-smooth scrollbar-thin scrollbar-thumb-primary  scrollbar-track-primary-100;
-        direction: rtl;
       }
       li{
         @apply list-none
       }
       body {
-        @apply text-zinc-800 bg-white h-full font-ShabnamFD text-lg overflow-x-hidden scroll-smooth;
+        @apply text-zinc-800 bg-white h-full font-ShabnamFD text-base overflow-x-hidden scroll-smooth;
+      }
+      a{
+        @apply hover:text-secondary transition-colors
       }
 }
 
