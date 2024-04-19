@@ -74,6 +74,9 @@ module.exports = {
      } 
   }),
 ],
+corePlugins: {
+  aspectRatio: false,
+},
 plugins: [
   nextui(),
   require("tailwind-scrollbar"),
@@ -81,5 +84,6 @@ plugins: [
     addVariant("child", "& > *");
     addVariant("child-hover", "& > *:hover");
   },
+  require('@tailwindcss/aspect-ratio'),
 ],
 };
