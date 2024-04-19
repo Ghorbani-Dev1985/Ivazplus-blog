@@ -5,7 +5,7 @@ const Layout = ({children}) => {
     return ( 
         <>
         <Header />
-        <main className="container my-10">
+        <main className="container lg:max-w-screen-xl my-10">
         {children}
         </main>
         <Footer />
