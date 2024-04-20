@@ -9,8 +9,8 @@ import Category from "@/Features/Blogs/Category";
 const Blogs = ({ blogsList, categories }) => {
   return (
     <Layout>
-      <section className="grid md:grid-cols-12 md:grid-rows-[60px_minmax(300px,_1fr)] gap-5">
-        <div className="md:col-span-3 row-span-1">
+      <section className="grid md:grid-cols-12 md:grid-rows-[60px_minmax(300px,_1fr)] gap-5 ">
+        <div className="md:col-span-3 row-span-1 h-screen relative">
           <Category categories={categories}/>
         </div>
         <div className="md:col-span-9 md:row-span-2 row-span-2">
