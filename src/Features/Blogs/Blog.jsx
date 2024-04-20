@@ -11,7 +11,7 @@ const Blog = () => {
              width={372}
              height={267}
              alt="ghorbani-dev.ir"
-             src='/images/1.jpg'
+             src='/images/blogs/1.jpg'
              className="w-full h-full object-center object-cover lg:w-full lg:h-full rounded-2xl"
             />
            </div>

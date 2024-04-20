@@ -1,5 +1,6 @@
 import Blog from "./Blog";
 import Category from "./Category";
+import MobileFilterSort from "./MobileFilterSort";
 import Sort from "./Sort";
 
 const Blogs = () => {
@@ -10,6 +11,7 @@ const Blogs = () => {
         </div>
         <div className="md:col-span-9 md:row-span-2 row-span-2">
             <Sort />
+            <MobileFilterSort />
             <div>
                 <Blog />
             </div>
