@@ -24,7 +24,7 @@ const BlogList = ({blogsList}) => {
                  return (
                    <React.Fragment key={_id}>
                      <Link
-                       href="#"
+                       href={`/blogs/${title}`}
                        className="group flex flex-col md:flex-row md:items-center gap-3 p-2 my-4"
                      >
                        <div className="w-full flex-center md:w-1/3 aspect-w-16 aspect-h-9 lg:aspect-none">
@@ -54,9 +54,9 @@ const BlogList = ({blogsList}) => {
                              <span>{author.name}</span>
                            </div>
                            <div className="flex items-end gap-3">
-                             <span className="bg-gray-100 group-hover:bg-primary group-hover:text-white px-3 py-1 rounded-full transition-colors">
+                             <Link href={`/blogs/${category.englishTitle}`} className="bg-gray-100 group-hover:bg-primary group-hover:text-white px-3 py-1 rounded-full transition-colors">
                                {category.title}
-                             </span>
+                             </Link>
                              <span className="group-hover:text-zinc-800">
                                {ToLocalDateStringShort(createdAt)}
                              </span>
