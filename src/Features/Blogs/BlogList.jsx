@@ -77,7 +77,6 @@ const BlogList = ({ blogsList }) => {
                     isIconOnly
                     className="border-none w-8 h-8 min-w-6 hover:bg-slate-300 rounded-lg"
                     variant="faded"
-                    aria-label="Take a photo"
                   >
                     <HiOutlineChatAlt />
                     {commentsCount}
@@ -86,7 +85,6 @@ const BlogList = ({ blogsList }) => {
                     isIconOnly
                     className="border-none w-8 h-8 min-w-6 bg-rose-100 text-rose-500 hover:bg-rose-300 rounded-lg"
                     variant="faded"
-                    aria-label="Take a photo"
                   >
                     {
                             isLiked ?  <BiSolidHeart className="fill-rose-500" /> : <BiHeart className="text-rose-500"/>

@@ -1,12 +1,15 @@
 import Layout from "@/Containers/Layout";
 import Http from "@/Services/HttpService";
 import ToLocalDateStringShort from "@/Utils/ToLocalDateStringShort";
-import { BreadcrumbItem, Breadcrumbs, Chip, Divider } from "@nextui-org/react";
+import { BreadcrumbItem, Breadcrumbs, Button, Chip, Divider } from "@nextui-org/react";
 import Image from "next/image";
 import {
   BiBookmark,
   BiCalendar,
   BiHeart,
+  BiLogoInstagramAlt,
+  BiLogoTelegram,
+  BiLogoWhatsappSquare,
   BiSolidHeart,
   BiSolidUserCircle,
 } from "react-icons/bi";
@@ -14,6 +17,7 @@ import { GoCommit } from "react-icons/go";
 import { HiBookmark, HiOutlineChatAlt, HiOutlineClock } from "react-icons/hi";
 import DOMPurify from "isomorphic-dompurify";
 import Comment from "@/UI/Comment";
+import Link from "next/link";
 const Blog = ({ blog }) => {
   console.log(blog);
   const {
@@ -30,6 +34,7 @@ const Blog = ({ blog }) => {
     readingTime,
     isBookmarked,
     isLiked,
+    slug
   } = blog;
   return (
     <Layout>
@@ -103,14 +108,28 @@ const Blog = ({ blog }) => {
         ></article>
       </div>
       <Divider className="mb-5" />
-      <div className="flex items-center flex-wrap gap-2 my-5">
-        <h2 className="text-2xl">تگ‌ها:</h2>
-        {tags.map((tag) => (
-          <Chip key={tag} color="primary" variant="flat">
-            {tag}
-          </Chip>
-        ))}
+      <div className="flex-between">
+        <div className="flex items-center flex-wrap gap-2 my-5">
+          <h2 className="text-2xl">تگ‌ها:</h2>
+          {tags.map((tag) => (
+            <Chip key={tag} color="primary" variant="flat">
+              {tag}
+            </Chip>
+          ))}
+        </div>
+        <div className="flex items-center justify-end flex-wrap gap-2 mb-4">
+        <Button as={Link} href={`https://www.instagram.com/sharer.php?u=${process.env.NEXT_PUBLIC_DOMAIN_URL}/blogs/${slug}`} isIconOnly color="warning" variant="faded" className="border-none w-12 h-12 min-w-12 hover:bg-slate-200 rounded-lg">
+        <BiLogoInstagramAlt className="size-10 fill-pink-500"/>
+      </Button>
+           <Button as={Link} href={`https://telegram.me/share/url?url=${process.env.NEXT_PUBLIC_DOMAIN_URL}/blogs/${slug}`} isIconOnly color="warning" variant="faded" className="border-none w-12 h-12 min-w-12 hover:bg-slate-200 rounded-lg">
+           <BiLogoTelegram className="size-10 fill-sky-500"/>
+      </Button>
+      <Button as={Link} href={`whatsapp://send/?text=${process.env.NEXT_PUBLIC_DOMAIN_URL}/blogs/${slug}`} isIconOnly color="warning" variant="faded" className="border-none w-12 h-12 min-w-12 hover:bg-slate-200 rounded-lg">
+      <BiLogoWhatsappSquare className="size-10 fill-emerald-500"/>
+      </Button>
+        </div>
       </div>
+
       <Comment comments={comments} />
     </Layout>
   );
