@@ -12,6 +12,7 @@
     "@nextui-org/react": "^2.3.1",
     "axios": "^1.6.8",
     "framer-motion": "^11.1.2",
+    "isomorphic-dompurify": "^2.7.0",
     "mongoose": "^8.3.2",
     "next": "14.2.1",
     "query-string": "^9.0.0",

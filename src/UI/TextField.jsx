@@ -12,7 +12,7 @@ const TextField = ({
   errors,
 }) => {
   return (
-    <div>
+    <div className="w-full">
       <label htmlFor={name} className="flex mb-1">
         {label} {required && <span className="text-rose-500">*</span>}
       </label>

@@ -16,6 +16,12 @@
       body {
         @apply text-zinc-800 bg-white h-full font-ShabnamFD text-base overflow-x-hidden scroll-smooth;
       }
+      h1,h2,h3{
+        @apply font-extrabold my-4
+      }
+      img{
+        @apply rounded-xl my-3
+      }
       a{
         @apply hover:text-secondary transition-colors
       }
