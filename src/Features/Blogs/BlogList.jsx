@@ -3,6 +3,7 @@ import { Button, Divider } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import { BiBookmark, BiHeart, BiSolidHeart } from "react-icons/bi";
 import {
   HiBookmark,
   HiHeart,
@@ -24,6 +25,7 @@ const BlogList = ({ blogsList }) => {
       readingTime,
       slug,
       title,
+      isBookmarked , isLiked
     }) => {
       return (
         <React.Fragment key={_id}>
@@ -86,7 +88,9 @@ const BlogList = ({ blogsList }) => {
                     variant="faded"
                     aria-label="Take a photo"
                   >
-                    <HiHeart className="fill-rose-500" />
+                    {
+                            isLiked ?  <BiSolidHeart className="fill-rose-500" /> : <BiHeart className="text-rose-500"/>
+                          }
                     {likesCount}
                   </Button>
                   <Button
@@ -95,7 +99,10 @@ const BlogList = ({ blogsList }) => {
                     variant="faded"
                     aria-label="Take a photo"
                   >
-                    <HiBookmark className="fill-sky-500" />
+                    {
+                      isBookmarked ? <HiBookmark className="fill-sky-500" /> : <BiBookmark className="text-sky-500"/>
+                    }
+                    
                   </Button>
                 </div>
                 <div className="flex-center gap-2 text-gray-500">

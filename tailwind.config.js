@@ -85,5 +85,6 @@ plugins: [
     addVariant("child-hover", "& > *:hover");
   },
   require('@tailwindcss/aspect-ratio'),
+  require('@tailwindcss/typography'),
 ],
 };
