@@ -18,8 +18,17 @@ import { HiBookmark, HiOutlineChatAlt, HiOutlineClock } from "react-icons/hi";
 import DOMPurify from "isomorphic-dompurify";
 import Comment from "@/UI/Comment";
 import Link from "next/link";
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { MdContentCopy } from "react-icons/md";
 const Blog = ({ blog }) => {
   console.log(blog);
+  const [copied , setCopied] = useState(false)
+  const CopyHandler = () => {
+    setCopied(true)
+    toast.success('لینک کپی شد')
+  }
   const {
     author,
     category,
@@ -108,7 +117,7 @@ const Blog = ({ blog }) => {
         ></article>
       </div>
       <Divider className="mb-5" />
-      <div className="flex-between">
+      <div className="flex flex-col items-center md:flex-between  md:flex-row">
         <div className="flex items-center flex-wrap gap-2 my-5">
           <h2 className="text-2xl">تگ‌ها:</h2>
           {tags.map((tag) => (
@@ -127,6 +136,10 @@ const Blog = ({ blog }) => {
       <Button as={Link} href={`whatsapp://send/?text=${process.env.NEXT_PUBLIC_DOMAIN_URL}/blogs/${slug}`} isIconOnly color="warning" variant="faded" className="border-none w-12 h-12 min-w-12 hover:bg-slate-200 rounded-lg">
       <BiLogoWhatsappSquare className="size-10 fill-emerald-500"/>
       </Button>
+      <CopyToClipboard text={`${process.env.NEXT_PUBLIC_DOMAIN_URL}/blogs/${slug}`}
+          onCopy={CopyHandler}>
+          <p className="flex items-center gap-1 bg-slate-100 hover:bg-slate-200 px-2 text-slate-600 cursor-pointer py-3 rounded-lg transition-colors"><MdContentCopy className="size-6"/> کپی لینک </p>
+        </CopyToClipboard>
         </div>
       </div>
 

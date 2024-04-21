@@ -14,8 +14,8 @@ const Comment = ({comments}) => {
       } = useForm();
     return ( 
         <section className="flex flex-col">
-        <div className="w-full flex-between bg-primary text-white rounded-xl px-3 py-8 mb-2">
-    <p><span className="font-extrabold text-xl">دیدگاه کاربران</span><span className="mx-3">|</span> شما هم می توانید در مورد این مطلب نظر بدهید</p>
+        <div className="w-full flex flex-col items-center md:flex-row md:flex-between gap-y-4 bg-primary text-white rounded-xl px-3 py-8 mb-2">
+    <p><span className="font-extrabold md:text-xl">دیدگاه کاربران</span><span className="mx-1 md:mx-3">|</span> شما هم می توانید در مورد این مطلب نظر بدهید</p>
     <Button variant="bordered" className="text-white hover:bg-white hover:opacity-100 hover:text-primary py-6 px-8 text-lg transition-colors" onPress={onOpen}>افزودن نظر</Button>
     <Modal 
         size="4xl"
