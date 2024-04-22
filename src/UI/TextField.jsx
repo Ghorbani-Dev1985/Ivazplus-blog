@@ -22,7 +22,7 @@ const TextField = ({
         id={name}
         autoComplete="off"
         placeholder={placeholder}
-        className={`${ltr && "dir-ltr placeholder:text-right"} textField-input`}
+        className={`${ltr && "dir-ltr placeholder:text-right"} textField-input placeholder:text-right`}
       />
       {errors && errors[name] && (
         <span className="block text-right text-rose-500 my-3 text-base">

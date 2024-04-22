@@ -22,6 +22,9 @@
       img{
         @apply rounded-xl my-3
       }
+      p{
+        @apply leading-9 text-justify
+      }
       a{
         @apply hover:text-secondary transition-colors
       }
