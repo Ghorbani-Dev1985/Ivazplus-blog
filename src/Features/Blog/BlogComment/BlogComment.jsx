@@ -1,10 +1,10 @@
 import Alert from "@/UI/Alert";
 import TextAreaField from "@/UI/TextAreaField";
-import TextField from "@/UI/TextField";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
 import React from "react";
 import { useForm } from "react-hook-form";
 import SingleComment from "./SingleComment";
+import ReplayComment from "./ReplyComment";
 
 
 const Comment = ({comments}) => {
@@ -19,7 +19,8 @@ const Comment = ({comments}) => {
             comments.map((comment) => {
                 return !comment.responseTo && comment.status === 2 &&  
                 <React.Fragment key={comment._id}>
-                 <SingleComment comment={comment}/>    
+                 <SingleComment comment={comment}/>   
+                 <ReplayComment comments={comments} parentCommentId={comment._id}/> 
                 </React.Fragment>
             })
             :
@@ -32,7 +33,7 @@ const Comment = ({comments}) => {
  
 export default Comment;
 
-const CommentModal = ({btnText , headerText , transparent , submitBtnText , placeholderText , labelText}) => {
+const CommentModal = ({btnText , headerText , transparent , submitBtnText , placeholderText , labelText , CommentSubmitHandler}) => {
   const {isOpen, onOpen, onClose} = useDisclosure();
   const {
       register,
@@ -40,9 +41,13 @@ const CommentModal = ({btnText , headerText , transparent , submitBtnText , plac
       handleSubmit,
       reset,
     } = useForm();
+    const SubmitHandler = (data) => {
+       CommentSubmitHandler(data)
+       reset()
+    }
   return(
     <>
-     <Button variant="bordered" className={`${transparent ? "text-white hover:bg-white hover:opacity-100 hover:text-primary" : "bg-primary text-white hover:bg-white hover:text-primary border-primary"} py-6 px-8 text-lg transition-colors`} onPress={onOpen}>{btnText}</Button>
+     <Button variant="bordered" className={`${transparent ? "text-white hover:bg-white hover:opacity-100 hover:text-primary" : "bg-primary text-white hover:bg-white hover:text-primary border-primary"} p-4 text-lg transition-colors`} onPress={onOpen}>{btnText}</Button>
     <Modal 
         size="4xl"
         isOpen={isOpen} 
@@ -53,7 +58,7 @@ const CommentModal = ({btnText , headerText , transparent , submitBtnText , plac
             <>
               <ModalHeader className="flex flex-col items-center gap-1 text-xl border-b"> {headerText}</ModalHeader>
               <ModalBody>
-                <form>
+                <form onSubmit={handleSubmit(CommentSubmitHandler)}>
                 <TextAreaField name="Message" placeholder={placeholderText} label={labelText} required register={register} validationSchema={
             {
                 required: {placeholderText},

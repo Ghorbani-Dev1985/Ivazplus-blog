@@ -8,7 +8,7 @@ const SingleComment = ({comment}) => {
     const {writer , createdAt , content , responseTo} = comment
     return ( 
         <section className="flex flex-col bg-slate-100 shadow-md rounded-3xl p-3 md:p-4 my-3">
-            <div className="flex-between text-sm">
+            <div className="flex-col gap-y-4 md:gap-y-0 md:flex-row flex-between text-sm">
                 <div className="flex gap-3">
                   <Image
                     width={48}
