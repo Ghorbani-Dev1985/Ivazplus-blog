@@ -1,13 +1,13 @@
 import Layout from "@/Containers/Layout";
 import Http from "@/Services/HttpService";
 import { Divider } from "@nextui-org/react";
-import Comment from "@/UI/Comment";
 import BlogShare from "@/Features/Blog/BlogShare";
 import BlogTag from "@/Features/Blog/BlogTag";
 import RelatedBlog from "@/Features/Blog/RelatedBlog";
 import BlogBody from "@/Features/Blog/BlogBody";
 import BlogInfos from "@/Features/Blog/BlogInfos";
 import BlogBreadcrumb from "@/Features/Blog/BlogBreadcrumb";
+import BlogComment from "@/Features/Blog/BlogComment/BlogComment";
 const Blog = ({ blog }) => {
   const {
     author,
@@ -50,7 +50,7 @@ const Blog = ({ blog }) => {
       </div>
       <Divider />
       <RelatedBlog related={related} />
-      <Comment comments={comments} />
+      <BlogComment comments={comments} />
     </Layout>
   );
 };

@@ -1,5 +1,4 @@
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button, useDisclosure} from "@nextui-org/react";
-import TextField from "./TextField";
 import { useForm } from "react-hook-form";
 import TextAreaField from "./TextAreaField";
 import Alert from "./Alert";
@@ -28,47 +27,6 @@ const Comment = ({comments}) => {
               <ModalHeader className="flex flex-col items-center gap-1 text-xl border-b"> ارسال نظر</ModalHeader>
               <ModalBody>
                 <form>
-
-                <div className="w-full flex-center gap-8">
-                <TextField
-            name="FullName"
-            placeholder="لطفا نام و نام خانوادگی را وارد نمایید"
-            label="  نام و نام خانوادگی"
-            required
-            register={register}
-            validationSchema={{
-              required: "لطفا نام و نام خانوادگی را وارد نمایید",
-              minLength: {
-                value: 3,
-                message: "حداقل ۳ کاراکتر وارد نمایید  ",
-              },
-              maxLength: {
-                value: 30,
-                message: "حداکثر ۳۰ کاراکتر وارد نمایید",
-              },
-            }}
-            errors={errors}
-          />
-             <TextField
-            name="FullName"
-            placeholder="لطفا ایمیل را وارد نمایید"
-            label="  ایمیل"
-            required
-            register={register}
-            validationSchema={{
-              required: "لطفا ایمیل را وارد نمایید",
-              minLength: {
-                value: 3,
-                message: "حداقل ۳ کاراکتر وارد نمایید  ",
-              },
-              maxLength: {
-                value: 30,
-                message: "حداکثر ۳۰ کاراکتر وارد نمایید",
-              },
-            }}
-            errors={errors}
-          />
-                </div>
                 <TextAreaField name="Message" placeholder=" لطفا دیدگاه خود را وارد نمایید" label="نظر شما" required register={register} validationSchema={
             {
                 required: "لطفا نظر خود را وارد نمایید",
