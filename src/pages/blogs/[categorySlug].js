@@ -50,7 +50,7 @@ export async function getServerSideProps({ query}) {
   const { data: categoriesData } = categoriesResult;
   return {
     props: {
-      blogsList: blogsData,
+      blogsList: blogsData.docs,
       categories: categoriesData,
     },
   };

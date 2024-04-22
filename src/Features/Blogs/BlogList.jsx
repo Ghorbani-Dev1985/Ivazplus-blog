@@ -12,7 +12,7 @@ import {
 } from "react-icons/hi";
 
 const BlogList = ({ blogsList }) => {
-  return blogsList.docs.map(
+  return blogsList.map(
     ({
       _id,
       author,
@@ -29,17 +29,18 @@ const BlogList = ({ blogsList }) => {
     }) => {
       return (
         <React.Fragment key={_id}>
-          <section
+          <section>
+          <div
             className="group flex flex-col md:flex-row md:items-center gap-3 p-2 my-4"
           >
-            <Link href={`/blog/${slug}`} className="w-full flex-center md:w-1/3 aspect-w-16 aspect-h-9 lg:aspect-none">
+            <Link href={`/blog/${slug}`} className="w-full flex-center md:w-1/3 aspect-w-16 aspect-h-9 mb-5 md:mb-0 lg:aspect-none">
               <Image
                 width={372}
                 height={267}
                 alt="ghorbani-dev.ir"
                 src={coverImage}
                 className="w-full h-full object-center object-cover lg:w-full lg:h-full rounded-2xl"
-              />
+                />
             </Link>
             <div className="flex flex-1 flex-col gap-3">
               <Link href={`/blog/${slug}`}>
@@ -85,7 +86,7 @@ const BlogList = ({ blogsList }) => {
                     isIconOnly
                     className="border-none w-8 h-8 min-w-6 bg-rose-100 text-rose-500 hover:bg-rose-300 rounded-lg"
                     variant="faded"
-                  >
+                    >
                     {
                             isLiked ?  <BiSolidHeart className="fill-rose-500" /> : <BiHeart className="text-rose-500"/>
                           }
@@ -115,8 +116,9 @@ const BlogList = ({ blogsList }) => {
                 </div>
               </div>
             </div>
-          </section>
+          </div>
           <Divider />
+            </section>
         </React.Fragment>
       );
     }

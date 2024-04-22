@@ -8,6 +8,7 @@ import Category from "@/Features/Blogs/Category";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { GoCommit } from "react-icons/go";
 const Blogs = ({ blogsList, categories }) => {
+  console.log(blogsList)
   return (
     <Layout>
         <Breadcrumbs variant="solid" separator={<GoCommit className="fill-primary" />} className="mb-5 font-extrabold text-3xl">
@@ -37,7 +38,7 @@ export async function getServerSideProps({params}) {
   const {data : categoriesData} = categoriesResult;
   return {
     props: {
-      blogsList: blogsData,
+      blogsList: blogsData.docs,
       categories: categoriesData,
     },
   };
