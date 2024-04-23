@@ -7,45 +7,48 @@ import { Controller, useForm } from "react-hook-form";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const Register = () => {
-   const [isShowPassword , setIsShowPassword] = useState(false)
-    const {
-        register,
-        formState: { errors },
-        handleSubmit,
-        control,
-        reset,
-      } = useForm();
-      const RegisterHandler = (data) => {
-      console.log(data)
-      }
-    return ( 
-          <>
-                  <h2 className="text-xl mb-3">عضویت در فروشگاه</h2>
-                  <form onSubmit={handleSubmit(RegisterHandler)} className="w-full max-w-sm space-y-5 mb-4">
-                  <TextField
-            name="FullName"
-            placeholder="لطفا نام کامل خود را وارد نمایید"
-            label="  نام کامل"
-            required
-            register={register}
-            validationSchema={{
-                required: "لطفا نام کامل را وارد نمایید",
-              minLength: {
-                value: 6,
-                message: "حداقل ۶ کاراکتر وارد نمایید  ",
-              },
-              maxLength: {
-                  value: 30,
-                  message: "حداکثر ۳۰ کاراکتر وارد نمایید",
-              },
-              pattern: {
-                value: /^[\u0600-\u06FF\s]+$/g,
-                message: "لطفا فقط حروف فارسی وارد نمایید",
+  const [isShowPassword, setIsShowPassword] = useState(false);
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+    control,
+    reset,
+  } = useForm();
+  const RegisterHandler = (data) => {
+    console.log(data);
+  };
+  return (
+    <>
+      <h2 className="text-xl mb-3">عضویت در فروشگاه</h2>
+      <form
+        onSubmit={handleSubmit(RegisterHandler)}
+        className="w-full max-w-sm space-y-5 mb-4"
+      >
+        <TextField
+          name="FullName"
+          placeholder="لطفا نام کامل خود را وارد نمایید"
+          label="  نام کامل"
+          required
+          register={register}
+          validationSchema={{
+            required: "لطفا نام کامل را وارد نمایید",
+            minLength: {
+              value: 6,
+              message: "حداقل ۶ کاراکتر وارد نمایید  ",
             },
-            }}
-            errors={errors}
-          />
-           <TextField
+            maxLength: {
+              value: 30,
+              message: "حداکثر ۳۰ کاراکتر وارد نمایید",
+            },
+            pattern: {
+              value: /^[\u0600-\u06FF\s]+$/g,
+              message: "لطفا فقط حروف فارسی وارد نمایید",
+            },
+          }}
+          errors={errors}
+        />
+        <TextField
           name="Email"
           placeholder="لطفا ایمیل خود را وارد نمایید"
           label=" ایمیل "
@@ -58,108 +61,127 @@ const Register = () => {
               message: "حداقل ۶ کاراکتر وارد نمایید  ",
             },
             maxLength: {
-                value: 30,
-                message: "حداکثر ۳۰ کاراکتر وارد نمایید",
+              value: 30,
+              message: "حداکثر ۳۰ کاراکتر وارد نمایید",
             },
             pattern: {
-                value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g,
-                message: "لطفا ایمیل صحیح وارد نمایید",
+              value: /[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}/g,
+              message: "لطفا ایمیل صحیح وارد نمایید",
             },
-        }}
+          }}
           errors={errors}
         />
-         <TextField
-            name="PhoneNumber"
-            type="tel"
-            placeholder="لطفا تلفن تماس خود را وارد نمایید"
-            label="   تلفن تماس"
-            required
-            register={register}
-            validationSchema={{
-                required: "لطفا تلفن تماس خود را وارد نمایید",
-              minLength: {
-                  value: 11,
-                message: "حداقل ۱۱ کاراکتر وارد نمایید  ",
+        <TextField
+          name="PhoneNumber"
+          type="tel"
+          placeholder="لطفا تلفن تماس خود را وارد نمایید"
+          label="   تلفن تماس"
+          required
+          register={register}
+          validationSchema={{
+            required: "لطفا تلفن تماس خود را وارد نمایید",
+            minLength: {
+              value: 11,
+              message: "حداقل ۱۱ کاراکتر وارد نمایید  ",
             },
-              maxLength: {
-                  value: 11,
-                message: "حداکثر ۱۱ کاراکتر وارد نمایید",
-              },
-              pattern: {
-                value:
-                  /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/g,
-                message: "لطفا تلفن تماس را صحیح وارد نمایید",
-              },
-            }}
-            errors={errors}
-          />
-                   <TextField
-            name="Password"
-            type={isShowPassword ? "text" : "password"}
-            placeholder="لطفا کلمه عبور خود را وارد نمایید"
-            label="   کلمه عبور "
-            required
-            register={register}
-            validationSchema={{
-                required: "لطفا عبور خود را وارد نمایید",
-              minLength: {
-                  value: 8,
-                  message: "حداقل ۸ کاراکتر وارد نمایید  ",
-                },
-                maxLength: {
-                    value: 20,
-                    message: "حداکثر ۲۰ کاراکتر وارد نمایید",
-                },
-              pattern: {
-                value: /^^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/g,
-                message: "کلمه عبور  باید شامل حروف بزرگ و کوچک و عدد و کاراکتر باشد",
+            maxLength: {
+              value: 11,
+              message: "حداکثر ۱۱ کاراکتر وارد نمایید",
             },
-        }}
-        errors={errors}
+            pattern: {
+              value:
+                /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/g,
+              message: "لطفا تلفن تماس را صحیح وارد نمایید",
+            },
+          }}
+          errors={errors}
+        />
+        <TextField
+          name="Password"
+          type={isShowPassword ? "text" : "password"}
+          placeholder="لطفا کلمه عبور خود را وارد نمایید"
+          label="   کلمه عبور "
+          required
+          register={register}
+          validationSchema={{
+            required: "لطفا عبور خود را وارد نمایید",
+            minLength: {
+              value: 8,
+              message: "حداقل ۸ کاراکتر وارد نمایید  ",
+            },
+            maxLength: {
+              value: 20,
+              message: "حداکثر ۲۰ کاراکتر وارد نمایید",
+            },
+            pattern: {
+              value:
+                /^^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/g,
+              message:
+                "کلمه عبور  باید شامل حروف بزرگ و کوچک و عدد و کاراکتر باشد",
+            },
+          }}
+          errors={errors}
+        >
+          <button type="button"
+            className="absolute h-full left-2 top-0"
+            onClick={() => setIsShowPassword((prev) => !prev)}
           >
-            <button className="absolute h-full left-2 top-0" onClick={() => setIsShowPassword((prev) => !prev)}>
-              {
-                isShowPassword ?  <HiOutlineEyeOff className="size-5 stroke-slate-600"/> : <HiOutlineEye className="size-5 stroke-slate-600"/>
-              }
-            </button>
-          </TextField>
+            {isShowPassword ? (
+              <HiOutlineEyeOff className="size-5 stroke-slate-600" />
+            ) : (
+              <HiOutlineEye className="size-5 stroke-slate-600" />
+            )}
+          </button>
+        </TextField>
         <div>
-          <Controller 
-           control={control}
-           {...register("isAcceptRule" ,{ required: "لطفا قوانین سایت را مطالعه و بپذیرید" })}
-           render={({field: {onChange , value}})=> (
-          <Checkbox  defaultSelected color="secondary" onChange={onChange} isSelected={value}>
-            <div className="flex-center">
-            <p>با ثبت نام، تمام </p>
-        <Link href="/rule" className="px-1 font-extrabold">
-           قوانین و مقررات
-        </Link>
-        <p>سایت را می پذیرم</p>
-            </div>
-            </Checkbox>
-           )}
-           />
-           {
-          errors.isAcceptRule && <span className="block text-right text-rose-500 text-base">{errors.isAcceptRule.message}</span>
-       }
+          <Controller
+            control={control}
+            {...register("isAcceptRule", {
+              required: "لطفا قوانین سایت را مطالعه و بپذیرید",
+            })}
+            render={({ field: { onChange, value } }) => (
+              <Checkbox
+                defaultSelected
+                color="secondary"
+                onChange={onChange}
+                isSelected={value}
+              >
+                <div className="flex-center">
+                  <p>با ثبت نام، تمام </p>
+                  <Link href="/rule" className="px-1 font-extrabold">
+                    قوانین و مقررات
+                  </Link>
+                  <p>سایت را می پذیرم</p>
+                </div>
+              </Checkbox>
+            )}
+          />
+          {errors.isAcceptRule && (
+            <span className="block text-right text-rose-500 text-base">
+              {errors.isAcceptRule.message}
+            </span>
+          )}
         </div>
-                
-        
-          <div className="w-full flex-center my-8">
-            <Button type="submit" color="primary" className="w-full hover:bg-secondary hover:opacity-100">
-      عضویت
-    </Button>
-          </div>
-                  </form>
-            <Divider />
-            <div className="flex-center gap-1 p-5 text-primary">
-                <span>قبلا ثبت نام کرده اید؟</span>
-               <Link href="/login" className="font-extrabold">
-                ورود
-               </Link>
-            </div>
-           </>
-     );
-}
- 
+
+        <div className="w-full flex-center my-8">
+          <Button
+            type="submit"
+            color="primary"
+            className="w-full hover:bg-secondary hover:opacity-100 py-6"
+          >
+            عضویت
+          </Button>
+        </div>
+      </form>
+      <Divider />
+      <div className="flex-center gap-1 p-5 text-primary text-sm">
+        <span>قبلا ثبت نام کرده اید؟</span>
+        <Link href="/login" className="font-extrabold">
+          ورود
+        </Link>
+      </div>
+    </>
+  );
+};
+
 export default Register;
