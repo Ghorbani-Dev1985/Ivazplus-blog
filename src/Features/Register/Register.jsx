@@ -2,9 +2,12 @@ import TextField from "@/UI/TextField";
 import { Button, Checkbox, Divider } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const Register = () => {
+   const [isShowPassword , setIsShowPassword] = useState(false)
     const {
         register,
         formState: { errors },
@@ -92,7 +95,7 @@ const Register = () => {
           />
                    <TextField
             name="Password"
-            type="password"
+            type={isShowPassword ? "text" : "password"}
             placeholder="لطفا کلمه عبور خود را وارد نمایید"
             label="   کلمه عبور "
             required
@@ -113,7 +116,13 @@ const Register = () => {
             },
         }}
         errors={errors}
-          />
+          >
+            <button className="absolute h-full left-2 top-0" onClick={() => setIsShowPassword((prev) => !prev)}>
+              {
+                isShowPassword ?  <HiOutlineEyeOff className="size-5 stroke-slate-600"/> : <HiOutlineEye className="size-5 stroke-slate-600"/>
+              }
+            </button>
+          </TextField>
         <div>
           <Controller 
            control={control}

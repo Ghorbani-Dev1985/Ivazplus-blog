@@ -1,6 +1,10 @@
+import LoginRegisterLayout from "@/Containers/Layout/Login&RegisterLayout";
+
 const Login = () => {
-    return ( <>
-    </> );
+    return ( 
+    <LoginRegisterLayout>
+        
+    </LoginRegisterLayout> );
 }
  
 export default Login;
