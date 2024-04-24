@@ -1,10 +1,12 @@
 import Http from "@/Services/HttpService";
+import RouterPush from "@/Utils/RouterPush";
 import ToLocalDateStringShort from "@/Utils/ToLocalDateStringShort";
 import { Button, Divider } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import React from "react";
+import toast from "react-hot-toast";
 import { BiBookmark, BiHeart, BiSolidHeart } from "react-icons/bi";
 import {
   HiBookmark,
@@ -17,17 +19,19 @@ const BlogList = ({ blogsList }) => {
   const router = useRouter()
   const LikeHandler = (postID) => {
     Http.put(`/posts/like/${postID}`)
-    .then((res) => {
-      router.push(router)
+    .then(({data}) => {
+      RouterPush(router);
+      toast.success(data.message)
     })
-    .catch(err => console.log(err))
+    .catch(err => toast.error(err?.response?.data?.message))
   }
   const BookmarkHandler = (postID) => {
     Http.put(`/posts/bookmark/${postID}`)
-    .then((res) => {
-      router.push(router)
+    .then(({data}) => {
+      RouterPush(router) 
+      toast.success(data.message)
     })
-    .catch(err => console.log(err))
+    .catch(err => toast.error(err?.response?.data?.message))
   }
   return blogsList.map(
     ({
