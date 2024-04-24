@@ -17,11 +17,8 @@ const Login = () => {
     register,
     formState: { errors },
     handleSubmit,
-    control,
-    reset,
   } = useForm();
   const LoginHandler = (data) => {
-    console.log(data)
      Http.post('/user/signin' , data)
      .then(({data}) => {
       toast.success("ورود شما با موفقیت انجام شد")

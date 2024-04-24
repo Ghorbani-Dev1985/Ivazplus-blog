@@ -1,23 +1,37 @@
 import useTitle from "@/Hooks/useTitle";
+import Http from "@/Services/HttpService";
 import TextField from "@/UI/TextField";
 import { Button, Checkbox, Divider } from "@nextui-org/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const Register = () => {
   const title = useTitle("عضویت در فروشگاه | ایوازپلاس")
+  const router = useRouter()
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
     formState: { errors },
     handleSubmit,
     control,
-    reset,
   } = useForm();
   const RegisterHandler = (data) => {
-    console.log(data);
+    const RegisterData = {
+      name: data.name,
+      email: data.email,
+      phoneNumber: data.phoneNumber,
+      password: data.password
+    }
+    Http.post('/user/signup' , RegisterData)
+    .then(({data}) => {
+     toast.success("ثبت نام شما با موفقیت انجام شد")
+     router.push('/')
+    })
+    .catch((err) => toast.error(`${err?.response?.data?.message}`))
   };
   return (
     <>
@@ -27,7 +41,7 @@ const Register = () => {
         className="w-full max-w-sm space-y-5 mb-4"
       >
         <TextField
-          name="FullName"
+          name="name"
           placeholder="لطفا نام کامل خود را وارد نمایید"
           label="  نام کامل"
           required
@@ -50,7 +64,7 @@ const Register = () => {
           errors={errors}
         />
         <TextField
-          name="Email"
+          name="email"
           placeholder="لطفا ایمیل خود را وارد نمایید"
           label=" ایمیل "
           required
@@ -73,7 +87,7 @@ const Register = () => {
           errors={errors}
         />
         <TextField
-          name="PhoneNumber"
+          name="phoneNumber"
           type="tel"
           placeholder="لطفا تلفن تماس خود را وارد نمایید"
           label="   تلفن تماس"
@@ -92,13 +106,13 @@ const Register = () => {
             pattern: {
               value:
                 /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/g,
-              message: "لطفا تلفن تماس را صحیح وارد نمایید",
+              message: "لطفا تلفن تماس را صحیح  و با عدد انگلیسی وارد نمایید",
             },
           }}
           errors={errors}
         />
         <TextField
-          name="Password"
+          name="password"
           type={isShowPassword ? "text" : "password"}
           placeholder="لطفا کلمه عبور خود را وارد نمایید"
           label="   کلمه عبور "
@@ -142,10 +156,10 @@ const Register = () => {
             })}
             render={({ field: { onChange, value } }) => (
               <Checkbox
-                defaultSelected
                 color="secondary"
                 onChange={onChange}
                 isSelected={value}
+                
               >
                 <div className="flex-center">
                   <p>با ثبت نام، تمام </p>
