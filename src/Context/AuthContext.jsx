@@ -1,6 +1,6 @@
 import Http from "@/Services/HttpService";
 import Router from "next/router";
-import { createContext, useContext } from "react";
+import { createContext, useContext, useEffect } from "react";
 import toast from "react-hot-toast";
 import { useReducerAsync } from "use-reducer-async";
 
@@ -10,7 +10,7 @@ const AuthContextDispatcher = createContext();
 
 const InitialState = {
   user: null,
-  loading: false,
+  loading: true,
   error: null
 }
 
@@ -42,8 +42,15 @@ const asyncActionHandlers = {
             toast.error(`${err?.response?.data?.message}`)
         })
     },
-    LOGOUT: ({dispatch}) => (action) => {
-
+    GET_USER_INFOS : ({dispatch}) => (action) => {
+            dispatch({type: 'PENDING'})
+            Http.get('/user/load')
+            .then(({data}) => {
+             dispatch({type: 'SUCCESS' , payload: data})
+            })
+            .catch((err) => {
+                dispatch({type: 'REJECT' , error : err?.response?.data?.message})
+            })
     },
     REGISTER: ({dispatch}) => (action) =>{
         dispatch({type: 'PENDING'})
@@ -58,11 +65,27 @@ const asyncActionHandlers = {
             toast.error(`${err?.response?.data?.message}`)
         })
     },
+    LOGOUT: ({dispatch}) => (action) =>{
+        dispatch({type: 'PENDING'})
+        Http.get('/user/logout')
+        .then(({data}) => {
+         toast.success("خروج با موفقیت انجام شد")
+         window.location.href = '/';
+         dispatch({type: 'SUCCESS'})
+        })
+        .catch((err) => {
+            dispatch({type: 'REJECT' , error : err?.response?.data?.message})
+            toast.error(`${err?.response?.data?.message}`)
+        })
+    },
   };
 
 
 const AuthProvider = ({children}) => {
     const [user , dispatch] = useReducerAsync(reducer , InitialState , asyncActionHandlers);
+    useEffect(() => {
+   dispatch({type: "GET_USER_INFOS"})
+    },[])
     return (
         <AuthContext.Provider value={user}>
            <AuthContextDispatcher.Provider value={dispatch}>
