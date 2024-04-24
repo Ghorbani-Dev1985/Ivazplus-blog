@@ -45,7 +45,7 @@ export async function getServerSideProps(context) {
   const { data: blogsResult } = await Http.get(
     `/posts?${QueryString.stringify(query)}` , {
       headers : {
-        Cookie: req.headers.cookie
+        Cookie: req.headers.cookie || ""
       }}
   );
   const { data: categoriesResult } = await Http.get("/post-category");

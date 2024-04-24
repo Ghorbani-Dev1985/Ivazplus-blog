@@ -1,7 +1,9 @@
+import Http from "@/Services/HttpService";
 import ToLocalDateStringShort from "@/Utils/ToLocalDateStringShort";
 import { Button, Divider } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { BiBookmark, BiHeart, BiSolidHeart } from "react-icons/bi";
 import {
@@ -12,6 +14,21 @@ import {
 } from "react-icons/hi";
 
 const BlogList = ({ blogsList }) => {
+  const router = useRouter()
+  const LikeHandler = (postID) => {
+    Http.put(`/posts/like/${postID}`)
+    .then((res) => {
+      router.push(router)
+    })
+    .catch(err => console.log(err))
+  }
+  const BookmarkHandler = (postID) => {
+    Http.put(`/posts/bookmark/${postID}`)
+    .then((res) => {
+      router.push(router)
+    })
+    .catch(err => console.log(err))
+  }
   return blogsList.map(
     ({
       _id,
@@ -83,6 +100,7 @@ const BlogList = ({ blogsList }) => {
                     {commentsCount}
                   </Button>
                   <Button
+                    onPress={() => LikeHandler(_id)}
                     isIconOnly
                     className="border-none w-8 h-8 min-w-6 bg-rose-100 text-rose-500 hover:bg-rose-300 rounded-lg"
                     variant="faded"
@@ -93,6 +111,7 @@ const BlogList = ({ blogsList }) => {
                     {likesCount}
                   </Button>
                   <Button
+                    onPress={() => BookmarkHandler(_id)}
                     isIconOnly
                     className="border-none w-8 h-8 min-w-6 bg-sky-100 hover:bg-sky-300 rounded-lg"
                     variant="faded"

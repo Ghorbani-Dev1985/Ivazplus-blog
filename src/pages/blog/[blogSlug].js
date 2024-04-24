@@ -61,7 +61,7 @@ export async function getServerSideProps(context) {
   const { query , req} = context
   const { data: singleBlog } = await Http.get(`/posts/${query.blogSlug}` , {
     headers : {
-      Cookie: req.headers.cookie
+      Cookie: req.headers.cookie || ""
     }});
   const { data } = singleBlog;
   return {
