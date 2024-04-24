@@ -1,12 +1,13 @@
+import useTitle from "@/Hooks/useTitle";
 import TextField from "@/UI/TextField";
 import { Button, Checkbox, Divider } from "@nextui-org/react";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const Register = () => {
+  const title = useTitle("عضویت در فروشگاه | ایوازپلاس")
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,

@@ -1,11 +1,17 @@
+import useTitle from "@/Hooks/useTitle";
+import Http from "@/Services/HttpService";
 import TextField from "@/UI/TextField";
 import { Button, Divider } from "@nextui-org/react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const Login = () => {
+  const title = useTitle(" ورود به حساب کاربری | ایوازپلاس")
+  const router = useRouter()
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
@@ -14,7 +20,15 @@ const Login = () => {
     control,
     reset,
   } = useForm();
-  const LoginHandler = () => {};
+  const LoginHandler = (data) => {
+    console.log(data)
+     Http.post('/user/signin' , data)
+     .then(({data}) => {
+      toast.success("ورود شما با موفقیت انجام شد")
+      router.push('/')
+     })
+     .catch((err) => toast.error(`${err?.response?.data?.message}`))
+  };
   return (
     <>
       <h2 className="text-xl mb-3"> ورود به حساب کاربری</h2>
@@ -23,7 +37,7 @@ const Login = () => {
         className="w-full max-w-sm space-y-5 mb-4"
       >
         <TextField
-          name="Email"
+          name="email"
           placeholder="لطفا ایمیل خود را وارد نمایید"
           label=" ایمیل "
           required
@@ -46,7 +60,7 @@ const Login = () => {
           errors={errors}
         />
         <TextField
-          name="Password"
+          name="password"
           type={isShowPassword ? "text" : "password"}
           placeholder="لطفا کلمه عبور خود را وارد نمایید"
           label="   کلمه عبور "
@@ -87,7 +101,7 @@ const Login = () => {
           color="primary"
           className="w-full hover:bg-secondary hover:opacity-100 py-6"
         >
-          عضویت
+          ورود به حساب کاربری
         </Button>
         <Link href="/rule" className="flex text-sm tracking-tight my-3 hover:text-primary">
         با ورود و یا ثبت نام، شما شرایط و قوانین حریم خصوصی آن

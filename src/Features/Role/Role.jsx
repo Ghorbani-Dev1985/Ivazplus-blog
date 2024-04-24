@@ -17,7 +17,7 @@ const items = [
   },
 ];
 const Role = () => {
-  const title = useTitle("قوانین و مقررات");
+  const title = useTitle("قوانین و مقررات |ایواز پلاس");
   return (
     <>
       <RoleBreadcrumb />
