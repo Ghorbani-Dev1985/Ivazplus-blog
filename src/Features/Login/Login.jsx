@@ -1,3 +1,4 @@
+import { useAuthActions } from "@/Context/AuthContext";
 import useTitle from "@/Hooks/useTitle";
 import Http from "@/Services/HttpService";
 import TextField from "@/UI/TextField";
@@ -11,7 +12,8 @@ import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const Login = () => {
   const title = useTitle(" ورود به حساب کاربری | ایوازپلاس")
-  const router = useRouter()
+  const router = useRouter();
+  const dispatch = useAuthActions();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
@@ -19,12 +21,8 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const LoginHandler = (data) => {
-     Http.post('/user/signin' , data)
-     .then(({data}) => {
-      toast.success("ورود شما با موفقیت انجام شد")
-      router.push('/')
-     })
-     .catch((err) => toast.error(`${err?.response?.data?.message}`))
+    dispatch({type: "login" , payload: data})
+   // router.push('/')
   };
   return (
     <>

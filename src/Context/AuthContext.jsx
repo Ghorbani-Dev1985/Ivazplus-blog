@@ -1,26 +1,48 @@
-import { createContext, useContext, useReducer } from "react";
+import Http from "@/Services/HttpService";
+import { useRouter } from "next/router";
+import { createContext, useContext } from "react";
+import toast from "react-hot-toast";
+import { useReducerAsync } from "use-reducer-async";
 
 const AuthContext = createContext()
 
 const AuthContextDispatcher = createContext();
 
 const InitialState = {
-    
+  user: null,
+  loading: false,
+  error: null
 }
 
 const reducer = (state , action) => {
+    
   switch (action.type) {
-    case value:
-        
+    case "login":{
+        Http.post('/user/signin' , action.payload)
+        .then(({data}) => {
+         toast.success("ورود شما با موفقیت انجام شد")
+        })
+        .catch((err) => toast.error(`${err?.response?.data?.message}`))
+    }  
         break;
-  
-    default:
-        break;
+    case "register" : {
+
+    }
+    default: return {...state}
   }
 }
 
+const asyncActionHandlers = {
+    SLEEP: ({ dispatch }) => async (action) => {
+      dispatch({ type: 'START_LOGIN' });
+      await new Promise(r => setTimeout(r, action.ms));
+      dispatch({ type: 'END_LOGIN' });
+    },
+  };
+
+
 const AuthProvider = ({children}) => {
-    const [user , dispatch] = useReducer(reducer , InitialState);
+    const [user , dispatch] = useReducerAsync(reducer , InitialState , asyncActionHandlers);
 
     return (
         <AuthContext.Provider value={user}>
