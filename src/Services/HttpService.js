@@ -1,27 +1,25 @@
 import axios from "axios";
 
-const BASE_URL = "http://localhost:4000/api"
+const BASE_URL = "http://localhost:4000/api";
 
 const Api = axios.create({
-    baseURL: BASE_URL,
-    withCredentials: true
-})
+  baseURL: BASE_URL,
+  withCredentials: true,
+});
 
 Api.interceptors.request.use(
-    res => res,
-    err => Promise.reject(err)
-)
+  (res) => res,
+  (err) => Promise.reject(err)
+);
 
-Api.interceptors.response.use(
-    res => res,
-)
+Api.interceptors.response.use((res) => res);
 
 const Http = {
-    get: Api.get,
-    post: Api.post,
-    delete: Api.delete,
-    put: Api.put,
-    patch: Api.patch,
-}
+  get: Api.get,
+  post: Api.post,
+  delete: Api.delete,
+  put: Api.put,
+  patch: Api.patch,
+};
 
 export default Http;

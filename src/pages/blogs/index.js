@@ -31,8 +31,12 @@ const Blogs = ({ blogsList, categories }) => {
 
 export default Blogs;
 
-export async function getServerSideProps({params}) {
-  const { data: blogsResult } = await Http.get("/posts?page=1&limit=5");
+export async function getServerSideProps({req}) {
+  const { data: blogsResult } = await Http.get("/posts?page=1&limit=5" , {
+    headers : {
+      Cookie: req.headers.cookie
+    }
+  });
   const { data: categoriesResult } = await Http.get("/post-category");
   const { data: blogsData } = blogsResult;
   const {data : categoriesData} = categoriesResult;

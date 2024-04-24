@@ -27,7 +27,7 @@ const CategorySlug = ({ blogsList, categories }) => {
         <div className="md:col-span-9 md:row-span-2 row-span-2">
           <Sort />
           <MobileFilterSort />
-          {blogsList.docs.length ? (
+          {blogsList.length ? (
             <BlogList blogsList={blogsList} />
           ) : (
             <Alert alertText="مقاله ای برای نمایش وجود ندارد." />
@@ -40,10 +40,13 @@ const CategorySlug = ({ blogsList, categories }) => {
 
 export default CategorySlug;
 
-export async function getServerSideProps({ query}) {
-    console.log(query)
+export async function getServerSideProps(context) {
+    const { query , req} = context
   const { data: blogsResult } = await Http.get(
-    `/posts?${QueryString.stringify(query)}`
+    `/posts?${QueryString.stringify(query)}` , {
+      headers : {
+        Cookie: req.headers.cookie
+      }}
   );
   const { data: categoriesResult } = await Http.get("/post-category");
   const { data: blogsData } = blogsResult;

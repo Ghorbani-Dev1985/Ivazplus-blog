@@ -57,9 +57,12 @@ const Blog = ({ blog }) => {
 
 export default Blog;
 
-export async function getServerSideProps({ query }) {
-  console.log(query);
-  const { data: singleBlog } = await Http.get(`/posts/${query.blogSlug}`);
+export async function getServerSideProps(context) {
+  const { query , req} = context
+  const { data: singleBlog } = await Http.get(`/posts/${query.blogSlug}` , {
+    headers : {
+      Cookie: req.headers.cookie
+    }});
   const { data } = singleBlog;
   return {
     props: {
