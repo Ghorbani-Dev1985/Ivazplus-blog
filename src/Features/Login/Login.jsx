@@ -1,19 +1,19 @@
-import { useAuthActions } from "@/Context/AuthContext";
+import { useAuth, useAuthActions } from "@/Context/AuthContext";
 import useTitle from "@/Hooks/useTitle";
-import Http from "@/Services/HttpService";
+import Loading from "@/UI/Loading";
 import TextField from "@/UI/TextField";
 import { Button, Divider } from "@nextui-org/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 
 const Login = () => {
-  const title = useTitle(" ورود به حساب کاربری | ایوازپلاس")
-  const router = useRouter();
+  const title = useTitle(" ورود به حساب کاربری | ایوازپلاس");
+  const router = useRouter()
   const dispatch = useAuthActions();
+  const { loading , user} = useAuth();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
@@ -21,15 +21,17 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const LoginHandler = (data) => {
-    dispatch({type: "login" , payload: data})
-   // router.push('/')
+    dispatch({ type: "LOGIN", payload: data });
   };
+  useEffect(() => {
+    if(user) router.push("/")
+ },[user])
   return (
     <>
       <h2 className="text-xl mb-3"> ورود به حساب کاربری</h2>
       <form
         onSubmit={handleSubmit(LoginHandler)}
-        className="w-full max-w-sm space-y-5 mb-4"
+        className="w-full max-w-sm mb-4"
       >
         <TextField
           name="email"
@@ -80,7 +82,8 @@ const Login = () => {
           }}
           errors={errors}
         >
-          <button type="button"
+          <button
+            type="button"
             className="absolute h-full left-2 top-0"
             onClick={() => setIsShowPassword((prev) => !prev)}
           >
@@ -91,16 +94,24 @@ const Login = () => {
             )}
           </button>
         </TextField>
-        <Button
-          type="submit"
-          color="primary"
-          className="w-full hover:bg-secondary hover:opacity-100 py-6"
+        {loading ? (
+          <Loading />
+        ) : (
+          <div className="mt-5">
+          <Button
+            type="submit"
+            color="primary"
+            className="w-full hover:bg-secondary hover:opacity-100 py-6"
+          >
+            ورود به حساب کاربری
+          </Button>
+          </div>
+        )}
+        <Link
+          href="/rule"
+          className="flex text-sm tracking-tight my-3 hover:text-primary"
         >
-          ورود به حساب کاربری
-        </Button>
-        <Link href="/rule" className="flex text-sm tracking-tight my-3 hover:text-primary">
-        با ورود و یا ثبت نام، شما شرایط و قوانین حریم خصوصی آن
-                                را می‌پذیرید
+          با ورود و یا ثبت نام، شما شرایط و قوانین حریم خصوصی آن را می‌پذیرید
         </Link>
       </form>
       <Divider />

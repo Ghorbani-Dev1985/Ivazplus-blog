@@ -13,7 +13,7 @@ const TextField = ({
   children
 }) => {
   return (
-    <div className="w-full">
+    <div className="w-full mb-8">
       <label htmlFor={name} className="flex mb-1">
         {label} {required && <span className="text-rose-500">*</span>}
       </label>

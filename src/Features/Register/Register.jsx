@@ -1,17 +1,19 @@
 import useTitle from "@/Hooks/useTitle";
-import Http from "@/Services/HttpService";
 import TextField from "@/UI/TextField";
 import { Button, Checkbox, Divider } from "@nextui-org/react";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { useAuth, useAuthActions } from "@/Context/AuthContext";
+import { useRouter } from "next/router";
+import Loading from "@/UI/Loading";
 
 const Register = () => {
   const title = useTitle("عضویت در فروشگاه | ایوازپلاس")
   const router = useRouter()
+  const dispatch = useAuthActions();
+  const {loading , user} = useAuth();
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
@@ -26,19 +28,17 @@ const Register = () => {
       phoneNumber: data.phoneNumber,
       password: data.password
     }
-    Http.post('/user/signup' , RegisterData)
-    .then(({data}) => {
-     toast.success("ثبت نام شما با موفقیت انجام شد")
-     router.push('/')
-    })
-    .catch((err) => toast.error(`${err?.response?.data?.message}`))
+    dispatch({type: "REGISTER" , payload: RegisterData})
   };
+  useEffect(() => {
+     if(user) router.push("/")
+  },[user])
   return (
     <>
       <h2 className="text-xl mb-3">عضویت در فروشگاه</h2>
       <form
         onSubmit={handleSubmit(RegisterHandler)}
-        className="w-full max-w-sm space-y-5 mb-4"
+        className="w-full max-w-sm mb-4"
       >
         <TextField
           name="name"
@@ -178,18 +178,21 @@ const Register = () => {
           )}
         </div>
 
-        <div className="w-full flex-center my-8">
-          <Button
+        <div className="w-full flex-center my-5">
+          {
+            loading ? <Loading /> :  <Button
             type="submit"
             color="primary"
             className="w-full hover:bg-secondary hover:opacity-100 py-6"
           >
             عضویت
           </Button>
+          }
+         
         </div>
       </form>
       <Divider />
-      <div className="flex-center gap-1 p-5 text-primary text-sm">
+      <div className="flex-center gap-1 p-4 text-primary text-sm">
         <span>قبلا ثبت نام کرده اید؟</span>
         <Link href="/login" className="font-extrabold">
           ورود
