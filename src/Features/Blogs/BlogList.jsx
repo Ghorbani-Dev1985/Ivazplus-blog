@@ -16,7 +16,7 @@ import {
 } from "react-icons/hi";
 import PaginationList from '@/UI/PaginationList'
 
-const BlogList = ({ blogsList }) => {
+const BlogList = ({ blogsListDocs , blogsList }) => {
   const router = useRouter()
   const LikeHandler = (postID) => {
     Http.put(`/posts/like/${postID}`)
@@ -34,13 +34,12 @@ const BlogList = ({ blogsList }) => {
     })
     .catch(err => toast.error(err?.response?.data?.message))
   }
-
-  console.log(blogsList)
-  if(!blogsList.docs.length) return <Loading />
+      
+   if(!blogsListDocs.length) return <Loading />
   return (
     <>
     {
-    blogsList.docs.map(
+    blogsListDocs.map(
     ({
       _id,
       author,
@@ -152,7 +151,10 @@ const BlogList = ({ blogsList }) => {
       );
     }
   )}
+    {
+      blogsList &&
   <PaginationList page={blogsList.page} totalPages={blogsList.totalPages}/>
+    }
     </>
   )
 };

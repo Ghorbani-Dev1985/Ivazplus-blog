@@ -10,6 +10,7 @@ import BlogBreadcrumb from "@/Features/Blog/BlogBreadcrumb";
 import BlogComment from "@/Features/Blog/BlogComment/BlogComment";
 const Blog = ({ blog }) => {
   const {
+    _id,
     author,
     category,
     coverImage,
@@ -50,7 +51,7 @@ const Blog = ({ blog }) => {
       </div>
       <Divider />
       <RelatedBlog related={related} />
-      <BlogComment comments={comments} />
+      <BlogComment comments={comments} blogId={_id} />
     </Layout>
   );
 };

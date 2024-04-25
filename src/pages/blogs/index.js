@@ -23,7 +23,7 @@ const Blogs = ({ blogsList, categories }) => {
         <div className="md:col-span-9 md:row-span-2 row-span-2">
           <Sort />
           <MobileFilterSort />
-          <BlogList blogsList={blogsList} />
+          <BlogList blogsListDocs={blogsList.docs} blogsList={blogsList} />
         </div>
       </section>
     </Layout>

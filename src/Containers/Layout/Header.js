@@ -12,7 +12,6 @@ import { HiMiniArrowLeftEndOnRectangle, HiOutlineUser } from "react-icons/hi2";
 const Header = () => {
   const dispatch = useAuthActions();
   const { user , loading} = useAuth();
-  console.log(user);
   return (
     <div className={`${loading ? "opacity-0" : "opacity-100"} transition-all`}>
         

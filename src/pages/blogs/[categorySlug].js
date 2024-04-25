@@ -9,7 +9,6 @@ import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { GoCommit } from "react-icons/go";
 import QueryString from 'query-string'
 const CategorySlug = ({ blogsList, categories }) => {
-  console.log(blogsList)
   return (
     <Layout>
       <Breadcrumbs
@@ -29,7 +28,7 @@ const CategorySlug = ({ blogsList, categories }) => {
           <Sort />
           <MobileFilterSort />
           {blogsList.docs.length ? (
-            <BlogList blogsList={blogsList} />
+            <BlogList blogsListDocs={blogsList.docs} blogsList={blogsList} />
           ) : (
             <Alert alertText="مقاله ای برای نمایش وجود ندارد." />
           )}

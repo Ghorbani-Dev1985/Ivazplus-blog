@@ -39,7 +39,7 @@ const asyncActionHandlers = {
         })
         .catch((err) => {
             dispatch({type: 'REJECT' , error : err?.response?.data?.message})
-            toast.error(`${err?.response?.data?.message}`)
+            toast.error(err?.response?.data?.message)
         })
     },
     GET_USER_INFOS : ({dispatch}) => (action) => {
@@ -62,7 +62,7 @@ const asyncActionHandlers = {
         })
         .catch((err) => {
             dispatch({type: 'REJECT' , error : err?.response?.data?.message})
-            toast.error(`${err?.response?.data?.message}`)
+            toast.error(err?.response?.data?.message)
         })
     },
     LOGOUT: ({dispatch}) => (action) =>{
@@ -75,7 +75,7 @@ const asyncActionHandlers = {
         })
         .catch((err) => {
             dispatch({type: 'REJECT' , error : err?.response?.data?.message})
-            toast.error(`${err?.response?.data?.message}`)
+            toast.error(err?.response?.data?.message)
         })
     },
   };

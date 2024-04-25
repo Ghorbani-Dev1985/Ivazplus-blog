@@ -1,11 +1,13 @@
 import ToLocalDateStringShort from "@/Utils/ToLocalDateStringShort";
 import { Chip } from "@nextui-org/react";
 import Image from "next/image";
-import { CommentModal } from "./BlogComment";
+import CommentModal from "./CommentModal";
+import { useRouter } from "next/router";
 
-const SingleComment = ({comment}) => {
-    console.log(comment)
-    const {writer , createdAt , content , responseTo} = comment
+
+const SingleComment = ({comment , blogId}) => {
+  const router = useRouter();
+    const {_id,writer , createdAt , content , responseTo} = comment
     return ( 
         <section className="flex flex-col bg-slate-100 shadow-md rounded-3xl p-3 md:p-4 my-3">
             <div className="flex-col gap-y-4 md:gap-y-0 md:flex-row flex-between text-sm">
@@ -22,7 +24,7 @@ const SingleComment = ({comment}) => {
                     <p>{ToLocalDateStringShort(createdAt)}</p>
                  </div>
                 </div>
-                <CommentModal btnText="پاسخ" headerText="ارسال پاسخ" submitBtnText="رسال پاسخ" placeholderText=" لطفا پاسخ خود را وارد نمایید" labelText="پاسخ شما" />
+                <CommentModal blogId={blogId} router={router} responseTo={_id} btnText="پاسخ" headerText="ارسال پاسخ" submitBtnText="رسال پاسخ" placeholderText=" لطفا پاسخ خود را وارد نمایید" labelText="پاسخ شما" />
                 </div>
                  <p className="my-5 mr-16">{content}</p>
         </section>
