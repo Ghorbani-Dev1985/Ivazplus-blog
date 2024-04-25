@@ -9,6 +9,7 @@ import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { GoCommit } from "react-icons/go";
 import QueryString from 'query-string'
 const CategorySlug = ({ blogsList, categories }) => {
+  console.log(blogsList)
   return (
     <Layout>
       <Breadcrumbs
@@ -27,7 +28,7 @@ const CategorySlug = ({ blogsList, categories }) => {
         <div className="md:col-span-9 md:row-span-2 row-span-2">
           <Sort />
           <MobileFilterSort />
-          {blogsList.length ? (
+          {blogsList.docs.length ? (
             <BlogList blogsList={blogsList} />
           ) : (
             <Alert alertText="مقاله ای برای نمایش وجود ندارد." />
@@ -53,7 +54,7 @@ export async function getServerSideProps(context) {
   const { data: categoriesData } = categoriesResult;
   return {
     props: {
-      blogsList: blogsData.docs,
+      blogsList: blogsData,
       categories: categoriesData,
     },
   };

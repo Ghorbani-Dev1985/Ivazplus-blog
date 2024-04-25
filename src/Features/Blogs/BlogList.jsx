@@ -2,7 +2,7 @@ import Http from "@/Services/HttpService";
 import Loading from "@/UI/Loading";
 import RouterPush from "@/Utils/RouterPush";
 import ToLocalDateStringShort from "@/Utils/ToLocalDateStringShort";
-import { Button, Divider, Pagination } from "@nextui-org/react";
+import { Button, Divider } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -14,6 +14,7 @@ import {
   HiOutlineChatAlt,
   HiOutlineClock,
 } from "react-icons/hi";
+import PaginationList from '@/UI/PaginationList'
 
 const BlogList = ({ blogsList }) => {
   const router = useRouter()
@@ -33,11 +34,13 @@ const BlogList = ({ blogsList }) => {
     })
     .catch(err => toast.error(err?.response?.data?.message))
   }
-  if(!blogsList.length) return <Loading />
+
+  console.log(blogsList)
+  if(!blogsList.docs.length) return <Loading />
   return (
     <>
     {
-    blogsList.map(
+    blogsList.docs.map(
     ({
       _id,
       author,
@@ -149,9 +152,7 @@ const BlogList = ({ blogsList }) => {
       );
     }
   )}
-  <div className="flex-center my-4">
-  <Pagination isCompact showControls total={10} initialPage={1} classNames={{prev: "rotate-180" , next: "rotate-180" , forwardIcon: "rotate-180"}} />
-  </div>
+  <PaginationList page={blogsList.page} totalPages={blogsList.totalPages}/>
     </>
   )
 };
