@@ -42,6 +42,10 @@
     }
     .flex-between{
       @apply flex justify-between items-center
+    }
+    .dir-rtl{
+      direction: rtl;
+      text-align: center;
     }   
   }
   .ql-editor {

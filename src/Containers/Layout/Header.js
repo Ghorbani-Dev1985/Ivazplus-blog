@@ -13,7 +13,6 @@ const Header = () => {
   const dispatch = useAuthActions();
   const { user , loading} = useAuth();
   console.log(user);
-//dispatch({ type: "LOGOUT" })
   return (
     <div className={`${loading ? "opacity-0" : "opacity-100"} transition-all`}>
         
@@ -29,7 +28,7 @@ const Header = () => {
               className="size-14 object-cover cursor-pointer"
             />
           </DropdownTrigger>
-          <DropdownMenu aria-label="User Actions" variant="faded">
+          <DropdownMenu aria-label="User Actions" variant="faded" closeOnSelect={false}>
             <DropdownItem
               isReadOnly
               key="profile"
@@ -46,8 +45,7 @@ const Header = () => {
             <DropdownItem>Help & Feedback</DropdownItem>
             <DropdownItem
             key="logout"
-            
-              onPress={() => console.log("dfdff")}
+              onPress={() => dispatch({ type: "LOGOUT" })}
               color="danger"
               startContent={
                 <HiMiniArrowLeftEndOnRectangle className="size-5" />

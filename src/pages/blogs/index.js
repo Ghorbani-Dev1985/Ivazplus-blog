@@ -7,6 +7,7 @@ import Sort from "@/Features/Blogs/Sort";
 import Category from "@/Features/Blogs/Category";
 import { BreadcrumbItem, Breadcrumbs } from "@nextui-org/react";
 import { GoCommit } from "react-icons/go";
+import QueryString from 'query-string'
 const Blogs = ({ blogsList, categories }) => {
   console.log(blogsList)
   return (
@@ -31,8 +32,8 @@ const Blogs = ({ blogsList, categories }) => {
 
 export default Blogs;
 
-export async function getServerSideProps({req}) {
-  const { data: blogsResult } = await Http.get("/posts?page=1&limit=5" , {
+export async function getServerSideProps({req , query}) {
+  const { data: blogsResult } = await Http.get(`/posts?${QueryString.stringify(query)}` , {
     headers : {
       Cookie: req.headers.cookie || ""
     }

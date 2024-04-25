@@ -1,7 +1,8 @@
 import Http from "@/Services/HttpService";
+import Loading from "@/UI/Loading";
 import RouterPush from "@/Utils/RouterPush";
 import ToLocalDateStringShort from "@/Utils/ToLocalDateStringShort";
-import { Button, Divider } from "@nextui-org/react";
+import { Button, Divider, Pagination } from "@nextui-org/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -10,7 +11,6 @@ import toast from "react-hot-toast";
 import { BiBookmark, BiHeart, BiSolidHeart } from "react-icons/bi";
 import {
   HiBookmark,
-  HiHeart,
   HiOutlineChatAlt,
   HiOutlineClock,
 } from "react-icons/hi";
@@ -33,7 +33,11 @@ const BlogList = ({ blogsList }) => {
     })
     .catch(err => toast.error(err?.response?.data?.message))
   }
-  return blogsList.map(
+  if(!blogsList.length) return <Loading />
+  return (
+    <>
+    {
+    blogsList.map(
     ({
       _id,
       author,
@@ -51,7 +55,7 @@ const BlogList = ({ blogsList }) => {
       return (
         <React.Fragment key={_id}>
           <section>
-          <div
+              <div
             className="group flex flex-col md:flex-row md:items-center gap-3 p-2 my-4"
           >
             <Link href={`/blog/${slug}`} className="w-full flex-center md:w-1/3 aspect-w-16 aspect-h-9 mb-5 md:mb-0 lg:aspect-none">
@@ -139,13 +143,17 @@ const BlogList = ({ blogsList }) => {
                 </div>
               </div>
             </div>
-          </div>
-          <Divider />
+          </div> <Divider />
             </section>
         </React.Fragment>
       );
     }
-  );
+  )}
+  <div className="flex-center my-4">
+  <Pagination isCompact showControls total={10} initialPage={1} classNames={{prev: "rotate-180" , next: "rotate-180" , forwardIcon: "rotate-180"}} />
+  </div>
+    </>
+  )
 };
 
 export default BlogList;
