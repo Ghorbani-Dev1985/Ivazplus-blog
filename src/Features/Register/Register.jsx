@@ -8,12 +8,14 @@ import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
 import { useAuth, useAuthActions } from "@/Context/AuthContext";
 import { useRouter } from "next/router";
 import Loading from "@/UI/Loading";
+import { useDispatch , userSelector} from "react-redux";
 
 const Register = () => {
   const title = useTitle("عضویت در فروشگاه | ایوازپلاس")
   const router = useRouter()
-  const dispatch = useAuthActions();
-  const {loading , user} = useAuth();
+  const dispatch = useDispatch();
+  const userInfo = userSelector(state => state.userSignup);
+ const {user , loading} = userInfo;
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
@@ -22,13 +24,8 @@ const Register = () => {
     control,
   } = useForm();
   const RegisterHandler = (data) => {
-    const RegisterData = {
-      name: data.name,
-      email: data.email,
-      phoneNumber: data.phoneNumber,
-      password: data.password
-    }
-    dispatch({type: "REGISTER" , payload: RegisterData})
+
+    dispatch(userSignup(data))
   };
   useEffect(() => {
      if(user) router.push("/")

@@ -57,7 +57,7 @@ export const userSignin = (data) => (dispatch) => {
   Http
     .post("/user/signin", data)
     .then(({ data }) => {
-      toast.success(`${data.name} خوش آمدی!`);
+      toast.success(`${data.name} عزیز؛ خوش آمدی`);
       Router.push("/");
       dispatch(singinUserSuccess(data));
     })
@@ -75,7 +75,7 @@ export const userSignup = (data) => (dispatch) => {
   Http
     .post("/user/signup", data)
     .then(({ data }) => {
-      toast.success(`${data.name} خوش آمدی!`);
+      toast.success(`${data.name} عزیز؛ خوش آمدی`);
       Router.push("/");
       dispatch(singinUserSuccess(data));
       dispatch(singupUserSuccess(data));

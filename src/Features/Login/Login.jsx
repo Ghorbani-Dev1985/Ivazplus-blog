@@ -1,4 +1,3 @@
-import { useAuth, useAuthActions } from "@/Context/AuthContext";
 import useTitle from "@/Hooks/useTitle";
 import Loading from "@/UI/Loading";
 import TextField from "@/UI/TextField";
@@ -8,12 +7,15 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { HiOutlineEye, HiOutlineEyeOff } from "react-icons/hi";
+import { useDispatch, userSelector} from "react-redux";
+import { userSignin } from "src/redux/user/userActions";
 
 const Login = () => {
   const title = useTitle(" ورود به حساب کاربری | ایوازپلاس");
   const router = useRouter()
-  const dispatch = useAuthActions();
-  const { loading , user} = useAuth();
+    const dispatch = useDispatch();
+    const userInfo = userSelector(state => state.userSignin);
+ const {user , loading} = userInfo;
   const [isShowPassword, setIsShowPassword] = useState(false);
   const {
     register,
@@ -21,7 +23,7 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   const LoginHandler = (data) => {
-    dispatch({ type: "LOGIN", payload: data });
+    dispatch(userSignin(data));
   };
   useEffect(() => {
     if(user) router.push("/")

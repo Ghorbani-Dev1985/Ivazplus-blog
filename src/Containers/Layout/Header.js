@@ -1,4 +1,3 @@
-import { useAuth, useAuthActions } from "@/Context/AuthContext";
 import {
   Dropdown,
   DropdownItem,
@@ -8,10 +7,11 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { HiMiniArrowLeftEndOnRectangle, HiOutlineUser } from "react-icons/hi2";
+import {userSelector} from 'react-redux';
 
 const Header = () => {
-  const dispatch = useAuthActions();
-  const { user , loading} = useAuth();
+ const userInfo = userSelector(state => state.userSignin);
+ const {user , loading} = userInfo;
   return (
     <div className={`${loading ? "opacity-0" : "opacity-100"} transition-all`}>
         
